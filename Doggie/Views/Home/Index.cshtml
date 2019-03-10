@@ -8,7 +8,7 @@
     <div class="panel with-nav-tabs panel-default">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
-                @foreach (var events in Model.Take(5))
+                @foreach (var events in Model.Take(8))
                 {
                     <li><a href="#@events.Id" data-toggle="tab">@events.Location</a></li>
                 }
@@ -16,7 +16,7 @@
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown">Flere Events <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        @foreach (var events in Model.Skip(5))
+                        @foreach (var events in Model.Skip(8))
                         {
                             <li><a href="#@events.Id" data-toggle="tab">@events.Location</a></li>
                         }

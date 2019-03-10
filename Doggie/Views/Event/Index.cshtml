@@ -1,0 +1,28 @@
+﻿@model Doggie.Models.Event
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Create new event</h2>
+
+@using (@Html.BeginForm("Save", "Event"))
+{
+    <div class="form-group">
+        @Html.LabelFor(e => e.DogOwnerName)
+        @Html.TextBoxFor(e => e.DogOwnerName, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(e => e.Location)
+        @Html.TextBoxFor(e => e.Location, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(e => e.StartingTime)
+        @Html.TextBoxFor(e => e.StartingTime, new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(e => e.EstimatedTimeMinutes)
+        @Html.TextBoxFor(e => e.EstimatedTimeMinutes, new {@class = "form-control"})
+    </div>
+    @Html.HiddenFor(e => e.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
