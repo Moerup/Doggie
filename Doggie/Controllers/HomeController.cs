@@ -9,9 +9,21 @@ namespace Doggie.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public ActionResult Index()
         {
-            var events = GetEvents();
+            var events = _context.Events.ToList();
             return View(events);
         }
 
