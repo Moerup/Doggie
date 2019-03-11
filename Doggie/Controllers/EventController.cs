@@ -31,6 +31,7 @@ namespace Doggie.Controllers
         }
 
         // GET: Event
+        [Authorize(Roles = "")]
         public ActionResult Index()
         {
             return View();

@@ -6,6 +6,7 @@
     <title>Doggie - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
 
 </head>
 <body>
@@ -21,7 +22,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Create Event", "Index", "Event")</li>
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Create Event", "Index", "Event")</li>
+                    }
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

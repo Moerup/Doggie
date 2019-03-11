@@ -11,15 +11,28 @@ namespace Doggie.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string Location { get; set; }
 
+        [Required]
         [Display(Name = "Dog Owner")]
         public string DogOwnerName { get; set; }
 
-        [Display(Name = "Start Time")]
-        public DateTime StartingTime { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
 
+        [Required]
+        [Display(Name = "Start Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
+        public TimeSpan StartingTime { get; set; }
+
+        [Required]
         [Display(Name = "Walking Time")]
         public int EstimatedTimeMinutes { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Comment { get; set; }
     }
 }

@@ -12,7 +12,6 @@ namespace Doggie.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Doggie.Models.ApplicationDbContext";
         }
 
         protected override void Seed(Doggie.Models.ApplicationDbContext context)
@@ -22,20 +21,20 @@ namespace Doggie.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             context.Events.AddOrUpdate(
-                e => e.Id,
-                new Event { Id = 1, DogOwnerName = "Michael", EstimatedTimeMinutes = 30, Location = "Bøgeskoven", StartingTime = DateTime.Now.AddMinutes(5) },
-                new Event { Id = 2, DogOwnerName = "Louise", EstimatedTimeMinutes = 20, Location = "Hundeparken", StartingTime = DateTime.Now.AddMinutes(10) },
-                new Event { Id = 3, DogOwnerName = "Nikolaj", EstimatedTimeMinutes = 45, Location = "Egeskoven", StartingTime = DateTime.Now.AddMinutes(15) },
-                new Event { Id = 4, DogOwnerName = "Mathias", EstimatedTimeMinutes = 100, Location = "Sankt Williams", StartingTime = DateTime.Now.AddMinutes(20) },
-                new Event { Id = 5, DogOwnerName = "Rasmus", EstimatedTimeMinutes = 15, Location = "DoggoPlay", StartingTime = DateTime.Now.AddMinutes(25) },
-                new Event { Id = 6, DogOwnerName = "Helle", EstimatedTimeMinutes = 10, Location = "Odense Skov", StartingTime = DateTime.Now.AddMinutes(30) },
-                new Event { Id = 7, DogOwnerName = "Magnus", EstimatedTimeMinutes = 15, Location = "Kongens have", StartingTime = DateTime.Now.AddMinutes(35) },
-                new Event { Id = 8, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Dronningens have", StartingTime = DateTime.Now.AddMinutes(40) },
-                new Event { Id = 9, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Hundeparken", StartingTime = DateTime.Now.AddMinutes(40) },
-                new Event { Id = 10, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Dronningens have", StartingTime = DateTime.Now.AddMinutes(40) },
-                new Event { Id = 11, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Bøgeskoven", StartingTime = DateTime.Now.AddMinutes(40) },
-                new Event { Id = 12, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Egeskoven", StartingTime = DateTime.Now.AddMinutes(40) }
-                );
+    e => e.Id,
+        new Event { Id = 1, DogOwnerName = "Michael", EstimatedTimeMinutes = 30, Location = "Bøgeskoven", StartingTime = TimeSpan.Parse("12:20"), Date = DateTime.Today , Comment = "This is a comment."},
+                    new Event { Id = 2, DogOwnerName = "Louise", EstimatedTimeMinutes = 20, Location = "Hundeparken", StartingTime = TimeSpan.Parse("12:30"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 3, DogOwnerName = "Nikolaj", EstimatedTimeMinutes = 45, Location = "Egeskoven", StartingTime = TimeSpan.Parse("12:40"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 4, DogOwnerName = "Mathias", EstimatedTimeMinutes = 100, Location = "Sankt Williams", StartingTime = TimeSpan.Parse("14:20"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 5, DogOwnerName = "Rasmus", EstimatedTimeMinutes = 15, Location = "DoggoPlay", StartingTime = TimeSpan.Parse("15:20"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 6, DogOwnerName = "Helle", EstimatedTimeMinutes = 10, Location = "Odense Skov", StartingTime = TimeSpan.Parse("16:20"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 7, DogOwnerName = "Magnus", EstimatedTimeMinutes = 15, Location = "Kongens have", StartingTime = TimeSpan.Parse("17:10"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 8, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Dronningens have", StartingTime = TimeSpan.Parse("17:50"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 9, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Hundeparken", StartingTime = TimeSpan.Parse("18:02"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 10, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Dronningens have", StartingTime = TimeSpan.Parse("18:20"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 11, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Bøgeskoven", StartingTime = TimeSpan.Parse("19:20"), Date = DateTime.Today, Comment = "This is a comment." },
+                    new Event { Id = 12, DogOwnerName = "Palle", EstimatedTimeMinutes = 30, Location = "Egeskoven", StartingTime = TimeSpan.Parse("20:30"), Date = DateTime.Today, Comment = "This is a comment." }
+                    );
         }
     }
 }
