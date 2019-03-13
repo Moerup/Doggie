@@ -1,16 +1,23 @@
 ﻿@using System.Diagnostics
+@using System.Globalization
+@using System.Threading
 @using Doggie.Models
+
+
+
 @model  IEnumerable<Doggie.Models.Event>
 @{
     ViewBag.Title = "Home Page";
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+
 <div>
+    <div id="culture">@(Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US"))</div>
     <div class="panel with-nav-tabs panel-default">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
-                @foreach (var events in Model.Take(6))
+                @foreach (var events in Model.Take(5))
                 {
                     <li><a href="#@events.Id" data-toggle="tab" onclick="addMarker(@events.Location.Latitude, @events.Location.Longitude)">@events.Location.Name</a></li>
                 }
@@ -18,9 +25,9 @@
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown">More Events <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        @foreach (var events in Model.Skip(6))
+                        @foreach (var events in Model.Skip(5))
                         {
-                            <li><a href="#@events.Id" data-toggle="tab">@events.Location.Name</a></li>
+                            <li><a href="#@events.Id" data-toggle="tab" onclick="addMarker(@events.Location.Latitude, @events.Location.Longitude)">@events.Location.Name</a></li>
                         }
                     </ul>
                 </li>
@@ -31,31 +38,40 @@
                 @foreach (var events in Model)
                 {
                     <div class="tab-pane fade" id="@events.Id">
-                        <div class="col-md-6">@events.DogOwnerName</div>
-                        <p>@events.Location.Latitude</p>
-                        <p>@events.Location.Longitude</p>
+                        <div>
+                            <div class="panel panel-default" style="background-color: #fff">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-muted">Information</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Dog owner</strong></span>@events.DogOwnerName</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Date</strong></span>@events.Date.ToString("dd MMMM")</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Meeting time</strong></span>@events.StartingTime.ToString(@"hh\:mm")</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Est. time</strong></span>@events.EstimatedTimeMinutes min</li>
+                                    <li class="list-group-item"><span><strong>Comment:</strong></span><br/>@events.Comment</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
         </div>
     </div>
-    <div id="map" class="col-md-6 row"></div>
+    <div id="map" class="col-md-5 row jumbotron" style="margin-left: 5%"></div>
 </div>
 
 <script type="text/javascript">
     // Initialize and add the map
-    
-    var map, marker, marker2, center;
+
+    var map, marker, center;
     function myMap(latitude = 55.4235, longitude = 10.3925) {
         center = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-            map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 12, center: center });
-            marker = new google.maps.Marker({ position: center, map: map });
+        map = new google.maps.Map(
+            document.getElementById('map'), { zoom: 11, center: center });
+        marker = new google.maps.Marker({ position: center, map: map });
     }
 
-    function addMarker(latitude, longitude) {
-        center = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-        marker2 = new google.maps.Marker({ position: center, map: map });
+    function addMarker(latitude2 = 55.4200, longitude2 = 10.3900) {
+        var position = new google.maps.LatLng({ lat: parseFloat(latitude2), lng: parseFloat(longitude2) });
+        marker.setPosition(position);
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHD4sELji-pEjUPWyqosUJLY-fO9a223I&callback=myMap" type="text/javascript"></script>
@@ -64,5 +80,8 @@
     #map {
         height: 400px;
         background-color: grey;
+    }
+    #culture {
+        visibility: hidden;
     }
 </style>

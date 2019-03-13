@@ -20,10 +20,9 @@ namespace Doggie.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-
             context.Events.AddOrUpdate(
     e => e.Id,
-                new Event { Id = 1, DogOwnerName = "Michael", EstimatedTimeMinutes = 30, LocationId = 2, StartingTime = TimeSpan.Parse("12:20"), Date = DateTime.Today, Comment = "This is a comment.",  },
+                new Event { Id = 1, DogOwnerName = "Michael", EstimatedTimeMinutes = 30, LocationId = 1, StartingTime = TimeSpan.Parse("12:20"), Date = DateTime.Today, Comment = "This is a comment." },
                 new Event { Id = 2, DogOwnerName = "Louise", EstimatedTimeMinutes = 20, LocationId = 1, StartingTime = TimeSpan.Parse("12:30"), Date = DateTime.Today, Comment = "This is a comment." },
                 new Event { Id = 3, DogOwnerName = "Nikolaj", EstimatedTimeMinutes = 45, LocationId = 4, StartingTime = TimeSpan.Parse("12:40"), Date = DateTime.Today, Comment = "This is a comment." },
                 new Event { Id = 4, DogOwnerName = "Mathias", EstimatedTimeMinutes = 100, LocationId = 5, StartingTime = TimeSpan.Parse("14:20"), Date = DateTime.Today, Comment = "This is a comment." },
