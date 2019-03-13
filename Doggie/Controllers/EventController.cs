@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using  System.Data.Entity;
+using Doggie.ViewModels;
 
 namespace Doggie.Controllers
 {
@@ -32,9 +34,15 @@ namespace Doggie.Controllers
 
         // GET: Event
         [Authorize(Roles = "")]
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            return View();
+            var locations = _context.Locations.ToList();
+            var viewModel = new EventViewModel
+            {
+                Location = locations
+            };
+
+            return View("Index", viewModel);
         }
     }
 }

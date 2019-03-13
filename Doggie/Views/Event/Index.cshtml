@@ -1,40 +1,59 @@
-﻿@model Doggie.Models.Event
+﻿@using System.Web.UI.WebControls
+@model Doggie.ViewModels.EventViewModel
 @{
     ViewBag.Title = "Index";
 }
 <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
-<!-- Required jQuery and jQuery UI Javascript references -->
 <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+
 <h2>Create new event</h2>
 
 @using (@Html.BeginForm("Save", "Event"))
 {
     <div class="form-group">
-        @Html.LabelFor(e => e.DogOwnerName)
-        @Html.ValidationMessageFor(e => e.DogOwnerName)
-        @Html.TextBoxFor(e => e.DogOwnerName, new { @class = "form-control" })
+        @Html.LabelFor(e => e.Event.DogOwnerName)
+        @Html.ValidationMessageFor(e => e.Event.DogOwnerName)
+        @Html.TextBoxFor(e => e.Event.DogOwnerName, new {@class = "form-control"})
     </div>
     <div class="form-group">
-        @Html.LabelFor(e => e.Location)
-        @Html.ValidationMessageFor(e => e.Location)
-        @Html.TextBoxFor(e => e.Location, new { @class = "form-control" })
+        @Html.LabelFor(e => e.Event.Location.Name)
+        @Html.ValidationMessageFor(e => e.Event.Location.Name)
+        @Html.DropDownListFor(e => e.Event.LocationId, new SelectList(Model.Location, "Id", "Name"), "Select Location", new {@class = "form-control"})
     </div>
     <div class="form-group">
-        @Html.LabelFor(e => e.Date)
-        @Html.ValidationMessageFor(e => e.Date)
-        @Html.TextBoxFor(e => e.Date, new { @class = "form-control", @placeholder="dd/mm/yyyy" })
+        @Html.LabelFor(e => e.Event.Date)
+        @Html.ValidationMessageFor(e => e.Event.Date)
+        @Html.EditorFor(e => e.Event.Date, new {htmlAttributes = new {@class = "form-control", @placeholder = "dd/mm/yyyy"}})
     </div>
     <div class="form-group">
-        @Html.LabelFor(e => e.StartingTime)
-        @Html.ValidationMessageFor(e => e.StartingTime)
-        @Html.TextBoxFor(e => e.StartingTime, new { @class = "form-control", @placeholder="hh:mm:ss" })
+        @Html.LabelFor(e => e.Event.StartingTime)
+        @Html.ValidationMessageFor(e => e.Event.StartingTime)
+        @Html.TextBoxFor(e => e.Event.StartingTime, new { @class = "form-control", @placeholder="hh:mm" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(e => e.EstimatedTimeMinutes)
-        @Html.ValidationMessageFor(e => e.EstimatedTimeMinutes)
-        @Html.TextBoxFor(e => e.EstimatedTimeMinutes, new { @class = "form-control", @placeholder="In minutes" })
+        @Html.LabelFor(e => e.Event.EstimatedTimeMinutes)
+        @Html.ValidationMessageFor(e => e.Event.EstimatedTimeMinutes)
+        @Html.TextBoxFor(e => e.Event.EstimatedTimeMinutes, new { @class = "form-control", @placeholder="In minutes" })
     </div>
-    @Html.HiddenFor(e => e.Id)
+    @Html.HiddenFor(e => e.Event.Id)
     <button type="submit" class="btn btn-primary">Save</button>
 }
+@section Scripts {  
+  
+    @Scripts.Render("~/bundles/jqueryui")  
+    @Styles.Render("~/Content/cssjqryUi")  
+  
+    <script type="text/javascript">  
+        $(document).ready(function () {  
+            $('input[type=datetime]').datepicker({  
+                dateFormat: "dd/M/yy",  
+                changeMonth: true,  
+                changeYear: true,  
+                yearRange: "-60:+0"  
+            });  
+  
+        });  
+    </script>  
+  
+}  

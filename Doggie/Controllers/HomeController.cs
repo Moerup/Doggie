@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Doggie.Models;
+using System.Data.Entity;
 
 namespace Doggie.Controllers
 {
@@ -23,7 +24,7 @@ namespace Doggie.Controllers
 
         public ActionResult Index()
         {
-            var events = _context.Events.ToList();
+            var events = _context.Events.Include(e => e.Location).ToList();
             return View(events);
         }
 

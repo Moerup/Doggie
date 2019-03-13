@@ -1,39 +1,68 @@
-﻿@using Doggie.Models
-@model IEnumerable<Doggie.Models.Event>
+﻿@using System.Diagnostics
+@using Doggie.Models
+@model  IEnumerable<Doggie.Models.Event>
 @{
     ViewBag.Title = "Home Page";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <div>
     <div class="panel with-nav-tabs panel-default">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
-                @foreach (var events in Model.Take(8))
+                @foreach (var events in Model.Take(6))
                 {
-                    <li><a href="#@events.Id" data-toggle="tab">@events.Location</a></li>
+                    <li><a href="#@events.Id" data-toggle="tab" onclick="addMarker(@events.Location.Latitude, @events.Location.Longitude)">@events.Location.Name</a></li>
                 }
 
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown">More Events <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        @foreach (var events in Model.Skip(8))
+                        @foreach (var events in Model.Skip(6))
                         {
-                            <li><a href="#@events.Id" data-toggle="tab">@events.Location</a></li>
+                            <li><a href="#@events.Id" data-toggle="tab">@events.Location.Name</a></li>
                         }
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="panel-body">
+        <div class="panel-body row col-md-6">
             <div class="tab-content">
                 @foreach (var events in Model)
                 {
-                <div class="tab-pane fade" id="@events.Id">
-                    <div class="col-md-6">@events.DogOwnerName</div>
-                    <div class="col-md-6">@events.Location</div>
-                </div>
+                    <div class="tab-pane fade" id="@events.Id">
+                        <div class="col-md-6">@events.DogOwnerName</div>
+                        <p>@events.Location.Latitude</p>
+                        <p>@events.Location.Longitude</p>
+                    </div>
                 }
             </div>
         </div>
     </div>
+    <div id="map" class="col-md-6 row"></div>
 </div>
+
+<script type="text/javascript">
+    // Initialize and add the map
+    
+    var map, marker, marker2, center;
+    function myMap(latitude = 55.4235, longitude = 10.3925) {
+        center = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+            map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 12, center: center });
+            marker = new google.maps.Marker({ position: center, map: map });
+    }
+
+    function addMarker(latitude, longitude) {
+        center = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+        marker2 = new google.maps.Marker({ position: center, map: map });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHD4sELji-pEjUPWyqosUJLY-fO9a223I&callback=myMap" type="text/javascript"></script>
+
+<style>
+    #map {
+        height: 400px;
+        background-color: grey;
+    }
+</style>

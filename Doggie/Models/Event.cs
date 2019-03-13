@@ -11,8 +11,9 @@ namespace Doggie.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        public string Location { get; set; }
+        public Location Location { get; set; }
+
+        public int LocationId { get; set; }
 
         [Required]
         [Display(Name = "Dog Owner")]
